@@ -5,8 +5,9 @@ class MemberProfile < ApplicationRecord
   belongs_to :user
   belongs_to :membership_plan
 
-  validates :status, presence: true
+  validates :status, length: { maximum: 255 }, allow_nil: true
 
   rhino_owner :organization
   rhino_references [ :organization, :user, :membership_plan ]
+  rhino_policy :member_profile
 end

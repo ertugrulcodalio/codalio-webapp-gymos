@@ -1,0 +1,47 @@
+model: Trainer
+slug: trainers
+table: trainers
+
+options:
+  belongs_to_organization: true
+  soft_deletes: false
+  audit_trail: true
+  pagination: true
+  per_page: 25
+
+columns:
+  name:
+    type: string
+    nullable: false
+    searchable: true
+    sortable: true
+  bio:
+    type: text
+    nullable: true
+    searchable: true
+  email:
+    type: string
+    nullable: false
+    searchable: true
+  organization_id:
+    type: foreignId
+    foreign_model: Organization
+    index: true
+
+relationships:
+  - type: belongsTo
+    model: Organization
+  - type: hasMany
+    model: GymClass
+
+permissions:
+  gym_staff:
+    actions: [index, show, store, update, destroy]
+    show_fields: "*"
+    create_fields: "*"
+    update_fields: "*"
+  gym_member:
+    actions: [index, show]
+    show_fields: [id, name, bio, email]
+    create_fields: []
+    update_fields: []

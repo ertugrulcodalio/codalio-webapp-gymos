@@ -1,0 +1,50 @@
+model: Transaction
+slug: transactions
+table: transactions
+
+options:
+  belongs_to_organization: true
+  soft_deletes: false
+  audit_trail: true
+  pagination: true
+  per_page: 25
+
+columns:
+  amount:
+    type: decimal
+    nullable: false
+    precision: 10
+    scale: 2
+    sortable: true
+  plan_name:
+    type: string
+    nullable: false
+  status:
+    type: string
+    nullable: false
+    default: "Success"
+    filterable: true
+  organization_id:
+    type: foreignId
+    foreign_model: Organization
+    index: true
+  user_id:
+    type: foreignId
+    foreign_model: User
+    index: true
+
+relationships:
+  - type: belongsTo
+    model: Organization
+  - type: belongsTo
+    model: User
+
+permissions:
+  gym_staff:
+    actions: [index, show]
+    show_fields: "*"
+  gym_member:
+    actions: [index, show, store]
+    show_fields: [id, amount, plan_name, status, created_at]
+    create_fields: [amount, plan_name, status, user_id]
+    update_fields: []

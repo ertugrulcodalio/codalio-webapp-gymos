@@ -754,7 +754,8 @@ const api = {
               "updatable": true
             },
             "nullable": false,
-            "type": "string"
+            "type": "string",
+            "maxLength": 255
           },
           "bio": {
             "x-rhino-attribute": {
@@ -776,7 +777,8 @@ const api = {
               "updatable": true
             },
             "nullable": false,
-            "type": "string"
+            "type": "string",
+            "maxLength": 255
           },
           "created_at": {
             "x-rhino-attribute": {
@@ -864,7 +866,8 @@ const api = {
               "updatable": true
             },
             "nullable": false,
-            "type": "string"
+            "type": "string",
+            "maxLength": 255
           },
           "price": {
             "x-rhino-attribute": {
@@ -888,7 +891,8 @@ const api = {
               "updatable": true
             },
             "nullable": false,
-            "type": "string"
+            "type": "string",
+            "maxLength": 255
           },
           "weekly_class_limit": {
             "x-rhino-attribute": {
@@ -988,7 +992,8 @@ const api = {
               "updatable": true
             },
             "nullable": false,
-            "type": "string"
+            "type": "string",
+            "maxLength": 255
           },
           "created_at": {
             "x-rhino-attribute": {
@@ -1109,7 +1114,8 @@ const api = {
               "updatable": true
             },
             "nullable": false,
-            "type": "string"
+            "type": "string",
+            "maxLength": 255
           },
           "description": {
             "x-rhino-attribute": {
@@ -1275,7 +1281,8 @@ const api = {
               "updatable": true
             },
             "nullable": false,
-            "type": "string"
+            "type": "string",
+            "maxLength": 255
           },
           "created_at": {
             "x-rhino-attribute": {
@@ -1357,6 +1364,137 @@ const api = {
           "organization",
           "user",
           "gym_class"
+        ]
+      },
+      "transaction": {
+        "x-rhino-model": {
+          "model": "transaction",
+          "modelPlural": "transactions",
+          "name": "transaction",
+          "pluralName": "transactions",
+          "readableName": "Transaction",
+          "pluralReadableName": "Transactions",
+          "ownedBy": "organization",
+          "singular": false,
+          "path": "/api/transactions",
+          "searchable": false
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "x-rhino-attribute": {
+              "name": "id",
+              "readableName": "Id",
+              "readable": true,
+              "creatable": false,
+              "updatable": false
+            },
+            "readOnly": true,
+            "nullable": false,
+            "type": "integer",
+            "format": "identifier"
+          },
+          "amount": {
+            "x-rhino-attribute": {
+              "name": "amount",
+              "readableName": "Amount",
+              "readable": true,
+              "creatable": true,
+              "updatable": true
+            },
+            "nullable": false,
+            "type": "decimal"
+          },
+          "plan_name": {
+            "x-rhino-attribute": {
+              "name": "plan_name",
+              "readableName": "Plan Name",
+              "readable": true,
+              "creatable": true,
+              "updatable": true
+            },
+            "nullable": false,
+            "type": "string",
+            "maxLength": 255
+          },
+          "status": {
+            "x-rhino-attribute": {
+              "name": "status",
+              "readableName": "Status",
+              "readable": true,
+              "creatable": true,
+              "updatable": true
+            },
+            "nullable": false,
+            "default": "Success",
+            "type": "string",
+            "maxLength": 255
+          },
+          "created_at": {
+            "x-rhino-attribute": {
+              "name": "created_at",
+              "readableName": "Created At",
+              "readable": true,
+              "creatable": false,
+              "updatable": false
+            },
+            "readOnly": true,
+            "nullable": false,
+            "type": "string",
+            "format": "datetime"
+          },
+          "updated_at": {
+            "x-rhino-attribute": {
+              "name": "updated_at",
+              "readableName": "Updated At",
+              "readable": true,
+              "creatable": false,
+              "updatable": false
+            },
+            "readOnly": true,
+            "nullable": false,
+            "type": "string",
+            "format": "datetime"
+          },
+          "organization": {
+            "x-rhino-attribute": {
+              "name": "organization",
+              "readableName": "Organization",
+              "readable": true,
+              "creatable": true,
+              "updatable": true
+            },
+            "nullable": false,
+            "type": "reference",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/organization"
+              }
+            ]
+          },
+          "user": {
+            "x-rhino-attribute": {
+              "name": "user",
+              "readableName": "User",
+              "readable": true,
+              "creatable": true,
+              "updatable": true
+            },
+            "nullable": false,
+            "type": "reference",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/user"
+              }
+            ]
+          }
+        },
+        "required": [
+          "amount",
+          "plan_name",
+          "status",
+          "organization",
+          "user"
         ]
       }
     }
@@ -4299,6 +4437,278 @@ const api = {
         },
         "tags": [
           "booking"
+        ]
+      }
+    },
+    "/api/transactions": {
+      "get": {
+        "operationId": "transaction-index",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/transaction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+              }
+            }
+          }
+        },
+        "tags": [
+          "transaction"
+        ]
+      },
+      "post": {
+        "operationId": "transaction-create",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/transaction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+              }
+            }
+          }
+        },
+        "tags": [
+          "transaction"
+        ]
+      }
+    },
+    "/api/transactions/:id": {
+      "get": {
+        "operationId": "transaction-show",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/transaction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+              }
+            }
+          }
+        },
+        "tags": [
+          "transaction"
+        ]
+      },
+      "patch": {
+        "operationId": "transaction-update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/transaction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+              }
+            }
+          }
+        },
+        "tags": [
+          "transaction"
+        ]
+      },
+      "put": {
+        "operationId": "transaction-update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/transaction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+              }
+            }
+          }
+        },
+        "tags": [
+          "transaction"
+        ]
+      },
+      "delete": {
+        "operationId": "transaction-destroy",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/transaction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+              }
+            }
+          }
+        },
+        "tags": [
+          "transaction"
         ]
       }
     }

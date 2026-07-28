@@ -1,0 +1,7 @@
+roles:
+  gym_staff:
+    name: Gym Staff
+    description: "Gym staff who can manage trainers, plans, classes, and bookings."
+  gym_member:
+    name: Gym Member
+    description: "Gym members who can view plans, classes, and manage bookings."
