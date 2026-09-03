@@ -1,0 +1,847 @@
+{
+  "criteria": [
+    {
+      "id": "AC-1",
+      "name": "Guest users can access the registration form at gymplatform.com/register without an account",
+      "user_story": "Tenant Registration & Provisioning",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/auth/SignupPage.tsx",
+        "app/models/organization.rb"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "name": "The registration form requires Gym Name, Subdomain, Admin Email, and Password",
+      "user_story": "Tenant Registration & Provisioning",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/auth/SignupPage.tsx",
+        "app/models/organization.rb"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "name": "The system validates that the subdomain is unique and contains only alphanumeric characters",
+      "user_story": "Tenant Registration & Provisioning",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/auth/SignupPage.tsx",
+        "app/models/organization.rb"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "name": "Upon successful registration, the system provisions the tenant database schema and redirects the user to the new subdomain login page at {subdomain}.gymplatform.com/login",
+      "user_story": "Tenant Registration & Provisioning",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/auth/SignupPage.tsx",
+        "app/models/organization.rb"
+      ]
+    },
+    {
+      "id": "AC-5",
+      "name": "Only guest users can access the registration page; authenticated users are redirected to their dashboard",
+      "user_story": "Tenant Registration & Provisioning",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/auth/SignupPage.tsx",
+        "app/models/organization.rb"
+      ]
+    },
+    {
+      "id": "AC-6",
+      "name": "The data model stores description and the application uses it as described in this story.",
+      "user_story": "Tenant Registration & Provisioning",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/auth/SignupPage.tsx",
+        "app/models/organization.rb"
+      ]
+    },
+    {
+      "id": "AC-7",
+      "name": "Guest users can access the gym's portal via a custom subdomain (e.g., ironworks.gymplatform.com)",
+      "user_story": "Subdomain Routing & Tenant Context Resolution",
+      "status": "tested",
+      "subtasks": [
+        "config/initializers/rhino.rb",
+        "app/frontend/components/member/TenantRootPage.tsx"
+      ]
+    },
+    {
+      "id": "AC-8",
+      "name": "The system resolves the tenant context at the request level based on the subdomain",
+      "user_story": "Subdomain Routing & Tenant Context Resolution",
+      "status": "tested",
+      "subtasks": [
+        "config/initializers/rhino.rb",
+        "app/frontend/components/member/TenantRootPage.tsx"
+      ]
+    },
+    {
+      "id": "AC-9",
+      "name": "If the subdomain does not exist, the system redirects the user to a 404 page or the main platform landing page",
+      "user_story": "Subdomain Routing & Tenant Context Resolution",
+      "status": "tested",
+      "subtasks": [
+        "config/initializers/rhino.rb",
+        "app/frontend/components/member/TenantRootPage.tsx"
+      ]
+    },
+    {
+      "id": "AC-10",
+      "name": "Only guest, gym_member, and gym_staff roles can access the resolved subdomain portal",
+      "user_story": "Subdomain Routing & Tenant Context Resolution",
+      "status": "tested",
+      "subtasks": [
+        "config/initializers/rhino.rb",
+        "app/frontend/components/member/TenantRootPage.tsx"
+      ]
+    },
+    {
+      "id": "AC-11",
+      "name": "The portal displays the specific gym's name and branding dynamically based on the resolved tenant context",
+      "user_story": "Subdomain Routing & Tenant Context Resolution",
+      "status": "tested",
+      "subtasks": [
+        "config/initializers/rhino.rb",
+        "app/frontend/components/member/TenantRootPage.tsx"
+      ]
+    },
+    {
+      "id": "AC-12",
+      "name": "The system automatically appends or enforces tenant isolation filters on all database queries",
+      "user_story": "Strict Data Isolation Verification",
+      "status": "tested",
+      "subtasks": [
+        "app/models/concerns/rhino_owner.rb",
+        "config/initializers/rhino.rb"
+      ]
+    },
+    {
+      "id": "AC-13",
+      "name": "Any attempt to access data belonging to another tenant ID returns an unauthorized error or a 404 Not Found",
+      "user_story": "Strict Data Isolation Verification",
+      "status": "tested",
+      "subtasks": [
+        "app/models/concerns/rhino_owner.rb",
+        "config/initializers/rhino.rb"
+      ]
+    },
+    {
+      "id": "AC-14",
+      "name": "Only system can execute cross-tenant database migrations or maintenance tasks",
+      "user_story": "Strict Data Isolation Verification",
+      "status": "tested",
+      "subtasks": [
+        "app/models/concerns/rhino_owner.rb",
+        "config/initializers/rhino.rb"
+      ]
+    },
+    {
+      "id": "AC-15",
+      "name": "Database connection pooling or schema switching is performed dynamically per request based on the resolved subdomain",
+      "user_story": "Strict Data Isolation Verification",
+      "status": "tested",
+      "subtasks": [
+        "app/models/concerns/rhino_owner.rb",
+        "config/initializers/rhino.rb"
+      ]
+    },
+    {
+      "id": "AC-16",
+      "name": "Unauthenticated users are redirected to /login when accessing staff dashboard paths",
+      "user_story": "Staff Authentication & Login",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/auth/StaffLoginPage.tsx",
+        "app/controllers/api/auth_controller.rb"
+      ]
+    },
+    {
+      "id": "AC-17",
+      "name": "Only gym_staff can access the staff dashboard at {subdomain}.gymplatform.com/staff/dashboard",
+      "user_story": "Staff Authentication & Login",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/auth/StaffLoginPage.tsx",
+        "app/controllers/api/auth_controller.rb"
+      ]
+    },
+    {
+      "id": "AC-18",
+      "name": "The login form validates credentials against the specific tenant's user database",
+      "user_story": "Staff Authentication & Login",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/auth/StaffLoginPage.tsx",
+        "app/controllers/api/auth_controller.rb"
+      ]
+    },
+    {
+      "id": "AC-19",
+      "name": "Upon successful login, the staff member is redirected to the staff dashboard",
+      "user_story": "Staff Authentication & Login",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/auth/StaffLoginPage.tsx",
+        "app/controllers/api/auth_controller.rb"
+      ]
+    },
+    {
+      "id": "AC-20",
+      "name": "The system provides a secure logout mechanism that invalidates the session and redirects to /login",
+      "user_story": "Staff Authentication & Login",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/auth/StaffLoginPage.tsx",
+        "app/controllers/api/auth_controller.rb"
+      ]
+    },
+    {
+      "id": "AC-21",
+      "name": "Only gym_staff can access the trainer management page at /staff/trainers",
+      "user_story": "Trainer Management",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffTrainersPage.tsx",
+        "app/models/trainer.rb"
+      ]
+    },
+    {
+      "id": "AC-22",
+      "name": "Unauthenticated users are redirected to /login when accessing /staff/trainers",
+      "user_story": "Trainer Management",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffTrainersPage.tsx",
+        "app/models/trainer.rb"
+      ]
+    },
+    {
+      "id": "AC-23",
+      "name": "Staff can create a trainer profile with Name, Bio, Specialty, and Email",
+      "user_story": "Trainer Management",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffTrainersPage.tsx",
+        "app/models/trainer.rb"
+      ]
+    },
+    {
+      "id": "AC-24",
+      "name": "Staff can update trainer details or delete a trainer profile if they have no active classes assigned",
+      "user_story": "Trainer Management",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffTrainersPage.tsx",
+        "app/models/trainer.rb"
+      ]
+    },
+    {
+      "id": "AC-25",
+      "name": "The system displays a list of all trainers registered under the current tenant",
+      "user_story": "Trainer Management",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffTrainersPage.tsx",
+        "app/models/trainer.rb"
+      ]
+    },
+    {
+      "id": "AC-26",
+      "name": "Only gym_staff can access the membership plan management page at /staff/plans",
+      "user_story": "Membership Plan Management",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffPlansPage.tsx",
+        "app/models/membership_plan.rb"
+      ]
+    },
+    {
+      "id": "AC-27",
+      "name": "Unauthenticated users are redirected to /login when accessing /staff/plans",
+      "user_story": "Membership Plan Management",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffPlansPage.tsx",
+        "app/models/membership_plan.rb"
+      ]
+    },
+    {
+      "id": "AC-28",
+      "name": "Staff can create a plan with Name, Price, Weekly Class Limit, and Status (Draft, Active, Inactive)",
+      "user_story": "Membership Plan Management",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffPlansPage.tsx",
+        "app/models/membership_plan.rb"
+      ]
+    },
+    {
+      "id": "AC-29",
+      "name": "Staff can change the status of a plan; only Active plans are visible to members for subscription",
+      "user_story": "Membership Plan Management",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffPlansPage.tsx",
+        "app/models/membership_plan.rb"
+      ]
+    },
+    {
+      "id": "AC-30",
+      "name": "The system prevents deletion of plans that have active member subscriptions",
+      "user_story": "Membership Plan Management",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffPlansPage.tsx",
+        "app/models/membership_plan.rb"
+      ]
+    },
+    {
+      "id": "AC-31",
+      "name": "Only gym_staff can access the class scheduling page at /staff/classes",
+      "user_story": "Class Scheduling & Management",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffClassesPage.tsx",
+        "app/models/gym_class.rb"
+      ]
+    },
+    {
+      "id": "AC-32",
+      "name": "Unauthenticated users are redirected to /login when accessing /staff/classes",
+      "user_story": "Class Scheduling & Management",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffClassesPage.tsx",
+        "app/models/gym_class.rb"
+      ]
+    },
+    {
+      "id": "AC-33",
+      "name": "Staff can schedule a class by entering Name, Trainer, Date, Time, Capacity, and Duration",
+      "user_story": "Class Scheduling & Management",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffClassesPage.tsx",
+        "app/models/gym_class.rb"
+      ]
+    },
+    {
+      "id": "AC-34",
+      "name": "Staff can cancel a class, which automatically updates its status to Cancelled and notifies booked members",
+      "user_story": "Class Scheduling & Management",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffClassesPage.tsx",
+        "app/models/gym_class.rb"
+      ]
+    },
+    {
+      "id": "AC-35",
+      "name": "The system validates that the assigned trainer is available at the scheduled time",
+      "user_story": "Class Scheduling & Management",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffClassesPage.tsx",
+        "app/models/gym_class.rb"
+      ]
+    },
+    {
+      "id": "AC-36",
+      "name": "Only gym_staff can access the bookings overview page at /staff/bookings",
+      "user_story": "View Member Bookings & Attendance",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffBookingsPage.tsx",
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-37",
+      "name": "Unauthenticated users are redirected to /login when accessing /staff/bookings",
+      "user_story": "View Member Bookings & Attendance",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffBookingsPage.tsx",
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-38",
+      "name": "Staff can view a list of all bookings filtered by class, date, or member name",
+      "user_story": "View Member Bookings & Attendance",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffBookingsPage.tsx",
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-39",
+      "name": "Staff can mark a member's attendance status as Attended, No-Show, or Cancelled",
+      "user_story": "View Member Bookings & Attendance",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffBookingsPage.tsx",
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-40",
+      "name": "The system displays real-time booking counts and remaining capacity for each scheduled class",
+      "user_story": "View Member Bookings & Attendance",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffBookingsPage.tsx",
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-41",
+      "name": "Only gym_member can access the plans selection page at /plans",
+      "user_story": "View Active Membership Plans",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/PlansPage.tsx",
+        "app/models/membership_plan.rb"
+      ]
+    },
+    {
+      "id": "AC-42",
+      "name": "Unauthenticated users are redirected to /login when accessing /plans",
+      "user_story": "View Active Membership Plans",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/PlansPage.tsx",
+        "app/models/membership_plan.rb"
+      ]
+    },
+    {
+      "id": "AC-43",
+      "name": "The page displays all active membership plans with their name, price, and weekly class limit",
+      "user_story": "View Active Membership Plans",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/PlansPage.tsx",
+        "app/models/membership_plan.rb"
+      ]
+    },
+    {
+      "id": "AC-44",
+      "name": "Draft or Inactive plans are not visible to members",
+      "user_story": "View Active Membership Plans",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/PlansPage.tsx",
+        "app/models/membership_plan.rb"
+      ]
+    },
+    {
+      "id": "AC-45",
+      "name": "The system highlights the member's currently active plan if they have one",
+      "user_story": "View Active Membership Plans",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/PlansPage.tsx",
+        "app/models/membership_plan.rb"
+      ]
+    },
+    {
+      "id": "AC-46",
+      "name": "Only gym_member can access the class schedule page at /classes",
+      "user_story": "View Available Classes",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/TenantRootPage.tsx",
+        "app/models/gym_class.rb"
+      ]
+    },
+    {
+      "id": "AC-47",
+      "name": "Unauthenticated users are redirected to /login when accessing /classes",
+      "user_story": "View Available Classes",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/TenantRootPage.tsx",
+        "app/models/gym_class.rb"
+      ]
+    },
+    {
+      "id": "AC-48",
+      "name": "The schedule displays active classes with Name, Trainer, Date, Time, and remaining spots",
+      "user_story": "View Available Classes",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/TenantRootPage.tsx",
+        "app/models/gym_class.rb"
+      ]
+    },
+    {
+      "id": "AC-49",
+      "name": "Members can filter classes by date, trainer, or class type",
+      "user_story": "View Available Classes",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/TenantRootPage.tsx",
+        "app/models/gym_class.rb"
+      ]
+    },
+    {
+      "id": "AC-50",
+      "name": "Cancelled classes are clearly marked and cannot be booked",
+      "user_story": "View Available Classes",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/TenantRootPage.tsx",
+        "app/models/gym_class.rb"
+      ]
+    },
+    {
+      "id": "AC-51",
+      "name": "Only gym_member can book a class via the /classes page",
+      "user_story": "Book a Class",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/TenantRootPage.tsx",
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-52",
+      "name": "Unauthenticated users are redirected to /login when attempting to book",
+      "user_story": "Book a Class",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/TenantRootPage.tsx",
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-53",
+      "name": "The system validates that the class has remaining capacity before confirming the booking",
+      "user_story": "Book a Class",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/TenantRootPage.tsx",
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-54",
+      "name": "Upon successful booking, the system decrements the class capacity and displays a confirmation modal",
+      "user_story": "Book a Class",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/TenantRootPage.tsx",
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-55",
+      "name": "The booking is saved and visible in the member's dashboard at /dashboard/bookings",
+      "user_story": "Book a Class",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/TenantRootPage.tsx",
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-56",
+      "name": "Only gym_member can access their bookings dashboard at /dashboard/bookings",
+      "user_story": "Manage My Bookings",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/DashboardBookingsPage.tsx",
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-57",
+      "name": "Unauthenticated users are redirected to /login when accessing /dashboard/bookings",
+      "user_story": "Manage My Bookings",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/DashboardBookingsPage.tsx",
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-58",
+      "name": "Members can view a list of their upcoming and past bookings",
+      "user_story": "Manage My Bookings",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/DashboardBookingsPage.tsx",
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-59",
+      "name": "Members can cancel an upcoming booking up to a configurable time limit (e.g., 2 hours before class)",
+      "user_story": "Manage My Bookings",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/DashboardBookingsPage.tsx",
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-60",
+      "name": "Cancelling a booking restores the class capacity and updates the member's weekly limit count",
+      "user_story": "Manage My Bookings",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/DashboardBookingsPage.tsx",
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-61",
+      "name": "Only gym_member is subject to membership-tier booking restrictions",
+      "user_story": "Enforce Weekly Class Limit",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/TenantRootPage.tsx",
+        "app/policies/booking_policy.rb"
+      ]
+    },
+    {
+      "id": "AC-62",
+      "name": "The system calculates the number of active bookings the member has for the current calendar week",
+      "user_story": "Enforce Weekly Class Limit",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/TenantRootPage.tsx",
+        "app/policies/booking_policy.rb"
+      ]
+    },
+    {
+      "id": "AC-63",
+      "name": "If the member attempts to book a class that exceeds their plan's weekly limit (e.g., 2 classes/week for Basic), the booking is blocked",
+      "user_story": "Enforce Weekly Class Limit",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/TenantRootPage.tsx",
+        "app/policies/booking_policy.rb"
+      ]
+    },
+    {
+      "id": "AC-64",
+      "name": "The system displays a clear error message: 'Booking limit reached for your membership tier'",
+      "user_story": "Enforce Weekly Class Limit",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/TenantRootPage.tsx",
+        "app/policies/booking_policy.rb"
+      ]
+    },
+    {
+      "id": "AC-65",
+      "name": "The 'Book Class' button is disabled or shows a warning if the weekly limit has already been reached",
+      "user_story": "Enforce Weekly Class Limit",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/TenantRootPage.tsx",
+        "app/policies/booking_policy.rb"
+      ]
+    },
+    {
+      "id": "AC-66",
+      "name": "Only gym_member can access the checkout page at /checkout",
+      "user_story": "Mock Payment & Subscription Activation",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/CheckoutPage.tsx",
+        "app/models/member_profile.rb"
+      ]
+    },
+    {
+      "id": "AC-67",
+      "name": "Unauthenticated users are redirected to /login when accessing /checkout",
+      "user_story": "Mock Payment & Subscription Activation",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/CheckoutPage.tsx",
+        "app/models/member_profile.rb"
+      ]
+    },
+    {
+      "id": "AC-68",
+      "name": "The checkout page displays a mock payment form accepting simulated credit card details",
+      "user_story": "Mock Payment & Subscription Activation",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/CheckoutPage.tsx",
+        "app/models/member_profile.rb"
+      ]
+    },
+    {
+      "id": "AC-69",
+      "name": "Upon successful mock payment, the system activates the subscription and updates the member's status to Active",
+      "user_story": "Mock Payment & Subscription Activation",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/CheckoutPage.tsx",
+        "app/models/member_profile.rb"
+      ]
+    },
+    {
+      "id": "AC-70",
+      "name": "The system displays a success confirmation view and redirects the member to the class schedule",
+      "user_story": "Mock Payment & Subscription Activation",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/CheckoutPage.tsx",
+        "app/models/member_profile.rb"
+      ]
+    },
+    {
+      "id": "AC-71",
+      "name": "Only gym_member can access the billing history page at /dashboard/billing",
+      "user_story": "Subscription Billing History",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/DashboardProfilePage.tsx",
+        "app/models/transaction.rb"
+      ]
+    },
+    {
+      "id": "AC-72",
+      "name": "Unauthenticated users are redirected to /login when accessing /dashboard/billing",
+      "user_story": "Subscription Billing History",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/DashboardProfilePage.tsx",
+        "app/models/transaction.rb"
+      ]
+    },
+    {
+      "id": "AC-73",
+      "name": "The page displays a list of all mock transactions with Date, Amount, Plan Name, and Status",
+      "user_story": "Subscription Billing History",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/DashboardProfilePage.tsx",
+        "app/models/transaction.rb"
+      ]
+    },
+    {
+      "id": "AC-74",
+      "name": "Members can view their current active plan and next renewal date",
+      "user_story": "Subscription Billing History",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/DashboardProfilePage.tsx",
+        "app/models/transaction.rb"
+      ]
+    },
+    {
+      "id": "AC-75",
+      "name": "The system allows members to cancel their active subscription, which sets it to cancel at the end of the current billing cycle",
+      "user_story": "Subscription Billing History",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/member/DashboardProfilePage.tsx",
+        "app/models/transaction.rb"
+      ]
+    },
+    {
+      "id": "AC-76",
+      "name": "Booking limit enforcement logic in policy",
+      "user_story": "Extra: Weekly Class Limit Enforcement (Booking#create)",
+      "status": "tested",
+      "subtasks": [
+        "app/policies/booking_policy.rb"
+      ]
+    },
+    {
+      "id": "AC-77",
+      "name": "Validate class capacity before booking",
+      "user_story": "Extra: Class Capacity Validation (Booking#create)",
+      "status": "tested",
+      "subtasks": [
+        "app/models/booking.rb"
+      ]
+    },
+    {
+      "id": "AC-78",
+      "name": "Validate trainer availability at scheduled time",
+      "user_story": "Extra: Trainer Availability Validation (GymClass#create / GymClass#update)",
+      "status": "tested",
+      "subtasks": [
+        "app/models/gym_class.rb"
+      ]
+    },
+    {
+      "id": "AC-79",
+      "name": "Prevent deletion of plans with active subscriptions",
+      "user_story": "Extra: Prevent Deletion of Active Plans (MembershipPlan#destroy)",
+      "status": "tested",
+      "subtasks": [
+        "app/models/membership_plan.rb"
+      ]
+    },
+    {
+      "id": "AC-80",
+      "name": "Prevent deletion of trainers with active classes",
+      "user_story": "Extra: Prevent Deletion of Active Trainers (Trainer#destroy)",
+      "status": "tested",
+      "subtasks": [
+        "app/models/trainer.rb"
+      ]
+    },
+    {
+      "id": "AC-81",
+      "name": "Gap compensation: Gym Owner Registration Page at /register (PRD_PROTOTYPE_ROUTE_GAP)",
+      "user_story": "Gap compensation: Gym Owner Registration Page at /register",
+      "compensated_from_gap": "PRD_PROTOTYPE_ROUTE_GAP",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/auth/SignupPage.tsx"
+      ]
+    },
+    {
+      "id": "AC-82",
+      "name": "Gap compensation: Staff Dashboard Overview Page at /staff/dashboard (SITEMAP_PAGE_NO_AC)",
+      "user_story": "Gap compensation: Staff Dashboard Overview Page at /staff/dashboard",
+      "compensated_from_gap": "SITEMAP_PAGE_NO_AC",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/staff/StaffDashboardPage.tsx"
+      ]
+    },
+    {
+      "id": "AC-83",
+      "name": "Gap compensation: Subscription and Transaction Models (DATA_MODEL_UX_MISMATCH)",
+      "user_story": "Gap compensation: Subscription and Transaction Models",
+      "compensated_from_gap": "DATA_MODEL_UX_MISMATCH",
+      "status": "tested",
+      "subtasks": [
+        "app/models/transaction.rb"
+      ]
+    },
+    {
+      "id": "AC-84",
+      "name": "Gap compensation: Staff Route Role-Based Gating (PROTECTED_ROUTE_NO_AUTH_AC)",
+      "user_story": "Gap compensation: Staff Route Role-Based Gating",
+      "compensated_from_gap": "PROTECTED_ROUTE_NO_AUTH_AC",
+      "status": "tested",
+      "subtasks": [
+        "app/frontend/components/Layout.tsx"
+      ]
+    }
+  ],
+  "updated_at": "2026-07-28T22:26:04.745743+00:00",
+  "compliance": {
+    "implemented": 84,
+    "partial": 0,
+    "missing": 0,
+    "total": 84,
+    "score": 100.0
+  }
+}

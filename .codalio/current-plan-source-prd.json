@@ -1,0 +1,602 @@
+{
+  "name": "GymOS",
+  "elevator_pitch": "GymOS is a robust, multi-tenant SaaS platform designed for gym owners who need a fully isolated, branded space to manage their operations, and for members who want a seamless booking experience. Unlike generic management tools, GymOS provides complete tenant isolation via subdomain routing (e.g., ironworks.gymplatform.com) and enforces strict membership-tier booking restrictions. Built as a high-fidelity portfolio project, it showcases production-ready multi-tenant architecture, mock payment flows, and secure data isolation, proving how modern SaaS applications can scale securely and efficiently.",
+  "problem_statement": "Gym owners need a simple, isolated way to manage their operations, plans, and bookings under their own brand/subdomain, while members need a seamless way to view active plans, available classes, and manage bookings without cross-tenant data leakage.",
+  "solution": "A multi-tenant SaaS platform that provides subdomain-based isolation for each gym. Gym staff can manage plans, classes, trainers, and bookings on their organization route, while members can view active plans, available classes, and manage their bookings on their customer route.",
+  "vision": "To showcase a production-ready multi-tenant SaaS architecture with robust authorization and tenant isolation.",
+  "competitors": "Mindbody, Zen Planner, Wodify (but this is a demo/portfolio project focused on multi-tenant architecture).",
+  "success_metrics": "Complete data isolation between subdomains, successful booking validation, and seamless subdomain routing.",
+  "design_principles": "### 1. Clean & Modern Aesthetics\n- **Minimalist Layouts**: Prioritize whitespace to reduce cognitive load, allowing users to focus on scheduling and booking tasks.\n- **Consistent Typography**: Use a highly legible sans-serif typeface (e.g., Inter) with clear weight hierarchies to distinguish headings, body text, and interactive elements.\n\n### 2. High-Contrast & Accessible Design\n- **WCAG 2.1 AA Compliance**: Ensure all text-to-background contrast ratios meet or exceed 4.5:1 for normal text and 3:1 for large text.\n- **Focus States & Keyboard Navigation**: Provide highly visible focus indicators for all interactive elements to support keyboard-only and screen-reader users.\n- **Color-Blind Friendly Indicators**: Never rely solely on color to convey state (e.g., use both color and icons/text labels to indicate booking status or error states).\n\n### 3. Responsive & Mobile-First Layouts\n- **Fluid Grid System**: Design with a mobile-first approach, ensuring that the class schedule, booking flows, and dashboards scale seamlessly from 320px mobile screens to ultra-wide desktop monitors.\n- **Touch-Friendly Targets**: Maintain a minimum touch target size of 48x48 pixels for all interactive elements on mobile devices.\n\n### 4. Clarity of Scheduling & Booking\n- **Visual Calendar & List Views**: Present class schedules in intuitive, filterable list and calendar formats, highlighting class times, available spots, and trainer names.\n- **Real-Time Limit Tracking**: Display clear, real-time indicators of the member's remaining weekly class credits (e.g., \"1 of 2 classes booked this week\") directly on the booking interface to prevent confusion.\n- **Instant Feedback**: Provide immediate, clear visual feedback for successful bookings, limit-reached errors, and loading states.",
+  "sitemap": "- Platform Landing Page (/) - Central landing page for GymOS where gym owners can register and provision subdomains.\n- Tenant Subdomain Root (/tenant-root) - Root container for tenant-specific subdomain routes (e.g., ironworks.gymplatform.com).\n  - Gym Home & Class Schedule (/) - Branded home page showing the active class schedule and booking options.\n  - Member Login (/login) - Authentication page for gym members.\n  - Member Registration (/signup) - Registration page for new gym members.\n  - Membership Plans (/plans) - View and select available membership tiers.\n  - Mock Payment Checkout (/checkout) - Complete mock payment to activate membership.\n  - My Bookings (/dashboard/bookings) - View active and past class bookings and remaining weekly limits.\n  - My Profile (/dashboard/profile) - Manage member profile and view active subscription details.\n  - Staff Login (/staff/login) - Authentication page for gym staff.\n  - Staff Dashboard Overview (/staff/dashboard) - Overview of gym metrics, active members, and quick actions.\n  - Class Management (/staff/classes) - Schedule, edit, draft, and publish classes.\n  - Membership Plan Management (/staff/plans) - Create, edit, and manage membership tiers and pricing.\n  - Trainer Management (/staff/trainers) - Manage gym trainers and their profiles.\n  - Member Bookings List (/staff/bookings) - View and manage all member class bookings.",
+  "navigation_design": "### 1. Platform Landing Page Navigation (gymplatform.com)\n- **Guest Navigation**:\n  - **Logo**: GymOS (links to `/`)\n  - **Features**: Scroll-to-section link\n  - **Pricing**: Scroll-to-section link\n  - **Button**: \"Create Gym\" (triggers onboarding flow)\n\n### 2. Tenant Subdomain Navigation (e.g., ironworks.gymplatform.com)\n\n#### A. Member Navigation (Role: `gym_member` / `guest`)\n- **Unauthenticated (Guest)**:\n  - **Logo**: [Gym Brand Logo] (links to `/`)\n  - **Schedule**: Links to `/` (Class Schedule)\n  - **Plans**: Links to `/plans`\n  - **Button**: \"Log In\" (links to `/login`)\n  - **Button**: \"Sign Up\" (links to `/signup`)\n- **Authenticated (Member)**:\n  - **Logo**: [Gym Brand Logo] (links to `/`)\n  - **Schedule**: Links to `/` (Class Schedule)\n  - **Plans**: Links to `/plans`\n  - **My Bookings**: Links to `/dashboard/bookings`\n  - **Profile**: Links to `/dashboard/profile`\n  - **Weekly Limit Indicator**: Visual badge showing remaining credits (e.g., \"1/2 left\")\n  - **Log Out**: Action button to clear session and redirect to `/`\n\n#### B. Staff Navigation (Role: `gym_staff`)\n- **Unauthenticated (Guest)**:\n  - **Logo**: [Gym Brand Logo] Staff (links to `/staff/login`)\n- **Authenticated (Staff)**:\n  - **Logo**: [Gym Brand Logo] Staff (links to `/staff/dashboard`)\n  - **Dashboard**: Links to `/staff/dashboard` (Overview)\n  - **Classes**: Links to `/staff/classes` (Class Management)\n  - **Plans**: Links to `/staff/plans` (Membership Plan Management)\n  - **Trainers**: Links to `/staff/trainers` (Trainer Management)\n  - **Bookings**: Links to `/staff/bookings` (Member Bookings List)\n  - **Log Out**: Action button to clear session and redirect to `/staff/login`",
+  "key_features": [
+    {
+      "feature_name": "Multi-Tenant Subdomain Routing & Isolation",
+      "feature_description": "Dynamic subdomain routing (e.g., ironworks.gymplatform.com) that resolves the tenant context at the request level, ensuring strict database-level or schema-level data isolation between gyms."
+    },
+    {
+      "feature_name": "Gym Staff Management Dashboard",
+      "feature_description": "A comprehensive back-office dashboard for gym staff to manage membership plans (active/draft/inactive), schedule classes, assign trainers, and view member bookings."
+    },
+    {
+      "feature_name": "Customer Portal & Class Booking",
+      "feature_description": "A branded member portal where gym members can view available classes, manage their active bookings, and track their weekly class attendance."
+    },
+    {
+      "feature_name": "Membership-Tier Booking Restrictions",
+      "feature_description": "An automated validation engine that enforces plan-specific limits (e.g., Basic plan restricted to 2 classes/week) during the booking checkout flow."
+    },
+    {
+      "feature_name": "Mock Payment & Subscription Billing",
+      "feature_description": "A simulated checkout flow allowing members to select plans and complete mock payments to activate their memberships and unlock booking credits."
+    },
+    {
+      "feature_name": "Platform Administration & Tenant Provisioning",
+      "feature_description": "A central landing page and onboarding flow where new gym owners can register their gym, provision a unique subdomain, and set up their initial admin account."
+    }
+  ],
+  "user_personas": [
+    {
+      "name": "Sarah",
+      "goals": "Efficiently manage class schedules, assign trainers, configure membership plans, and monitor member bookings without administrative overhead.",
+      "age_role": "34, gym_staff (application role: gym_staff)",
+      "pain_points": "Clunky, slow legacy software; difficulty updating schedules on the fly; lack of clear overview of daily bookings.",
+      "preferred_device": "Desktop and Tablet"
+    },
+    {
+      "name": "Alex",
+      "goals": "Quickly view available classes on a mobile device, book sessions instantly, and easily track remaining weekly class limits.",
+      "age_role": "27, gym_member (application role: gym_member)",
+      "pain_points": "Confusing booking interfaces; forgetting how many classes are left in their weekly tier limit; slow mobile loading times.",
+      "preferred_device": "Mobile (iOS/Android)"
+    }
+  ],
+  "user_stories": [
+    {
+      "phase": "Phase 1: Core Multi-Tenant Architecture & Routing",
+      "title": "Tenant Registration & Provisioning",
+      "user_story": {
+        "as_a": "guest",
+        "i_want": "to register my gym and provision a custom subdomain",
+        "so_that": "I can have a dedicated, isolated portal for my gym operations"
+      },
+      "key_feature": "Platform Administration & Tenant Provisioning",
+      "acceptance_criteria": [
+        "Guest users can access the registration form at gymplatform.com/register without an account",
+        "The registration form requires Gym Name, Subdomain, Admin Email, and Password",
+        "The system validates that the subdomain is unique and contains only alphanumeric characters",
+        "Upon successful registration, the system provisions the tenant database schema and redirects the user to the new subdomain login page at {subdomain}.gymplatform.com/login",
+        "Only guest users can access the registration page; authenticated users are redirected to their dashboard",
+        "The data model stores description and the application uses it as described in this story."
+      ]
+    },
+    {
+      "phase": "Phase 1: Core Multi-Tenant Architecture & Routing",
+      "title": "Subdomain Routing & Tenant Context Resolution",
+      "user_story": {
+        "as_a": "guest",
+        "i_want": "to access my gym's portal via its custom subdomain",
+        "so_that": "I am routed to the correct tenant context and see the correct branding"
+      },
+      "key_feature": "Multi-Tenant Subdomain Routing & Isolation",
+      "acceptance_criteria": [
+        "Guest users can access the gym's portal via a custom subdomain (e.g., ironworks.gymplatform.com)",
+        "The system resolves the tenant context at the request level based on the subdomain",
+        "If the subdomain does not exist, the system redirects the user to a 404 page or the main platform landing page",
+        "Only guest, gym_member, and gym_staff roles can access the resolved subdomain portal",
+        "The portal displays the specific gym's name and branding dynamically based on the resolved tenant context"
+      ]
+    },
+    {
+      "phase": "Phase 1: Core Multi-Tenant Architecture & Routing",
+      "title": "Strict Data Isolation Verification",
+      "user_story": {
+        "as_a": "system",
+        "i_want": "to enforce strict database-level or schema-level isolation between tenants",
+        "so_that": "no tenant can access or modify another tenant's data under any circumstances"
+      },
+      "key_feature": "Multi-Tenant Subdomain Routing & Isolation",
+      "acceptance_criteria": [
+        "The system automatically appends or enforces tenant isolation filters on all database queries",
+        "Any attempt to access data belonging to another tenant ID returns an unauthorized error or a 404 Not Found",
+        "Only system can execute cross-tenant database migrations or maintenance tasks",
+        "Database connection pooling or schema switching is performed dynamically per request based on the resolved subdomain"
+      ]
+    },
+    {
+      "phase": "Phase 1: Core Multi-Tenant Architecture & Routing",
+      "title": "Staff Authentication & Login",
+      "user_story": {
+        "as_a": "gym_staff",
+        "i_want": "to log in to my gym's staff portal",
+        "so_that": "I can securely manage my gym's operations"
+      },
+      "key_feature": "Platform Administration & Tenant Provisioning",
+      "acceptance_criteria": [
+        "Unauthenticated users are redirected to /login when accessing staff dashboard paths",
+        "Only gym_staff can access the staff dashboard at {subdomain}.gymplatform.com/staff/dashboard",
+        "The login form validates credentials against the specific tenant's user database",
+        "Upon successful login, the staff member is redirected to the staff dashboard",
+        "The system provides a secure logout mechanism that invalidates the session and redirects to /login"
+      ]
+    },
+    {
+      "phase": "Phase 2: Staff Portal",
+      "title": "Trainer Management",
+      "user_story": {
+        "as_a": "gym_staff",
+        "i_want": "to manage trainers (create, read, update, delete)",
+        "so_that": "I can assign them to classes and manage their schedules"
+      },
+      "key_feature": "Gym Staff Management Dashboard",
+      "acceptance_criteria": [
+        "Only gym_staff can access the trainer management page at /staff/trainers",
+        "Unauthenticated users are redirected to /login when accessing /staff/trainers",
+        "Staff can create a trainer profile with Name, Bio, Specialty, and Email",
+        "Staff can update trainer details or delete a trainer profile if they have no active classes assigned",
+        "The system displays a list of all trainers registered under the current tenant"
+      ]
+    },
+    {
+      "phase": "Phase 2: Staff Portal",
+      "title": "Membership Plan Management",
+      "user_story": {
+        "as_a": "gym_staff",
+        "i_want": "to manage membership plans (draft, active, inactive)",
+        "so_that": "members can subscribe to them and view their details"
+      },
+      "key_feature": "Gym Staff Management Dashboard",
+      "acceptance_criteria": [
+        "Only gym_staff can access the membership plan management page at /staff/plans",
+        "Unauthenticated users are redirected to /login when accessing /staff/plans",
+        "Staff can create a plan with Name, Price, Weekly Class Limit, and Status (Draft, Active, Inactive)",
+        "Staff can change the status of a plan; only Active plans are visible to members for subscription",
+        "The system prevents deletion of plans that have active member subscriptions"
+      ]
+    },
+    {
+      "phase": "Phase 2: Staff Portal",
+      "title": "Class Scheduling & Management",
+      "user_story": {
+        "as_a": "gym_staff",
+        "i_want": "to manage classes (create, read, update, cancel)",
+        "so_that": "members can view and book them"
+      },
+      "key_feature": "Gym Staff Management Dashboard",
+      "acceptance_criteria": [
+        "Only gym_staff can access the class scheduling page at /staff/classes",
+        "Unauthenticated users are redirected to /login when accessing /staff/classes",
+        "Staff can schedule a class by entering Name, Trainer, Date, Time, Capacity, and Duration",
+        "Staff can cancel a class, which automatically updates its status to Cancelled and notifies booked members",
+        "The system validates that the assigned trainer is available at the scheduled time"
+      ]
+    },
+    {
+      "phase": "Phase 2: Staff Portal",
+      "title": "View Member Bookings & Attendance",
+      "user_story": {
+        "as_a": "gym_staff",
+        "i_want": "to view all member bookings",
+        "so_that": "I can manage attendance and schedules effectively"
+      },
+      "key_feature": "Gym Staff Management Dashboard",
+      "acceptance_criteria": [
+        "Only gym_staff can access the bookings overview page at /staff/bookings",
+        "Unauthenticated users are redirected to /login when accessing /staff/bookings",
+        "Staff can view a list of all bookings filtered by class, date, or member name",
+        "Staff can mark a member's attendance status as Attended, No-Show, or Cancelled",
+        "The system displays real-time booking counts and remaining capacity for each scheduled class"
+      ]
+    },
+    {
+      "phase": "Phase 3: Member Portal",
+      "title": "View Active Membership Plans",
+      "user_story": {
+        "as_a": "gym_member",
+        "i_want": "to view active membership plans",
+        "so_that": "I can choose a plan that fits my needs"
+      },
+      "key_feature": "Customer Portal & Class Booking",
+      "acceptance_criteria": [
+        "Only gym_member can access the plans selection page at /plans",
+        "Unauthenticated users are redirected to /login when accessing /plans",
+        "The page displays all active membership plans with their name, price, and weekly class limit",
+        "Draft or Inactive plans are not visible to members",
+        "The system highlights the member's currently active plan if they have one"
+      ]
+    },
+    {
+      "phase": "Phase 3: Member Portal",
+      "title": "View Available Classes",
+      "user_story": {
+        "as_a": "gym_member",
+        "i_want": "to view available classes",
+        "so_that": "I can find classes to attend"
+      },
+      "key_feature": "Customer Portal & Class Booking",
+      "acceptance_criteria": [
+        "Only gym_member can access the class schedule page at /classes",
+        "Unauthenticated users are redirected to /login when accessing /classes",
+        "The schedule displays active classes with Name, Trainer, Date, Time, and remaining spots",
+        "Members can filter classes by date, trainer, or class type",
+        "Cancelled classes are clearly marked and cannot be booked"
+      ]
+    },
+    {
+      "phase": "Phase 3: Member Portal",
+      "title": "Book a Class",
+      "user_story": {
+        "as_a": "gym_member",
+        "i_want": "to book a class",
+        "so_that": "I can reserve my spot in the session"
+      },
+      "key_feature": "Customer Portal & Class Booking",
+      "acceptance_criteria": [
+        "Only gym_member can book a class via the /classes page",
+        "Unauthenticated users are redirected to /login when attempting to book",
+        "The system validates that the class has remaining capacity before confirming the booking",
+        "Upon successful booking, the system decrements the class capacity and displays a confirmation modal",
+        "The booking is saved and visible in the member's dashboard at /dashboard/bookings"
+      ]
+    },
+    {
+      "phase": "Phase 3: Member Portal",
+      "title": "Manage My Bookings",
+      "user_story": {
+        "as_a": "gym_member",
+        "i_want": "to view and manage my bookings",
+        "so_that": "I can cancel if needed"
+      },
+      "key_feature": "Customer Portal & Class Booking",
+      "acceptance_criteria": [
+        "Only gym_member can access their bookings dashboard at /dashboard/bookings",
+        "Unauthenticated users are redirected to /login when accessing /dashboard/bookings",
+        "Members can view a list of their upcoming and past bookings",
+        "Members can cancel an upcoming booking up to a configurable time limit (e.g., 2 hours before class)",
+        "Cancelling a booking restores the class capacity and updates the member's weekly limit count"
+      ]
+    },
+    {
+      "phase": "Phase 3: Member Portal",
+      "title": "Enforce Weekly Class Limit",
+      "user_story": {
+        "as_a": "gym_member",
+        "i_want": "the system to enforce my membership plan's weekly class limit",
+        "so_that": "I don't exceed my weekly allowance"
+      },
+      "key_feature": "Membership-Tier Booking Restrictions",
+      "acceptance_criteria": [
+        "Only gym_member is subject to membership-tier booking restrictions",
+        "The system calculates the number of active bookings the member has for the current calendar week",
+        "If the member attempts to book a class that exceeds their plan's weekly limit (e.g., 2 classes/week for Basic), the booking is blocked",
+        "The system displays a clear error message: 'Booking limit reached for your membership tier'",
+        "The 'Book Class' button is disabled or shows a warning if the weekly limit has already been reached"
+      ]
+    },
+    {
+      "phase": "Phase 4: Polish & Demo Readiness",
+      "title": "Mock Payment & Subscription Activation",
+      "user_story": {
+        "as_a": "gym_member",
+        "i_want": "to complete a mock payment to activate my membership",
+        "so_that": "I can unlock booking credits and start booking classes"
+      },
+      "key_feature": "Mock Payment & Subscription Billing",
+      "acceptance_criteria": [
+        "Only gym_member can access the checkout page at /checkout",
+        "Unauthenticated users are redirected to /login when accessing /checkout",
+        "The checkout page displays a mock payment form accepting simulated credit card details",
+        "Upon successful mock payment, the system activates the subscription and updates the member's status to Active",
+        "The system displays a success confirmation view and redirects the member to the class schedule"
+      ]
+    },
+    {
+      "phase": "Phase 4: Polish & Demo Readiness",
+      "title": "Subscription Billing History",
+      "user_story": {
+        "as_a": "gym_member",
+        "i_want": "to view my subscription billing history",
+        "so_that": "I can track my mock payments and active plan status"
+      },
+      "key_feature": "Mock Payment & Subscription Billing",
+      "acceptance_criteria": [
+        "Only gym_member can access the billing history page at /dashboard/billing",
+        "Unauthenticated users are redirected to /login when accessing /dashboard/billing",
+        "The page displays a list of all mock transactions with Date, Amount, Plan Name, and Status",
+        "Members can view their current active plan and next renewal date",
+        "The system allows members to cancel their active subscription, which sets it to cancel at the end of the current billing cycle"
+      ]
+    }
+  ],
+  "user_flows": [
+    {
+      "steps": [
+        "[guest] Navigate to the main landing page at gymplatform.com",
+        "[guest] Click 'Create Gym' and fill out the registration form (Gym Name, Subdomain, Admin Email, Password)",
+        "[guest] Submit the form; the system provisions the tenant and redirects to the new subdomain login page at ironworks.gymplatform.com/login"
+      ],
+      "flow_name": "Gym Onboarding and Subdomain Setup"
+    },
+    {
+      "steps": [
+        "[gym_staff] Navigate to ironworks.gymplatform.com/staff/login and log in",
+        "[gym_staff] Navigate to the dashboard at /staff/plans and click 'Create Plan'",
+        "[gym_staff] Enter plan details (Name, Price, Weekly Class Limit) and save as Active",
+        "[gym_staff] Navigate to /staff/classes and click 'Schedule Class'",
+        "[gym_staff] Enter class details (Name, Trainer, Date, Time, Capacity) and publish"
+      ],
+      "flow_name": "Gym Staff Managing Plans and Classes"
+    },
+    {
+      "steps": [
+        "[guest] Navigate to the gym's subdomain portal at ironworks.gymplatform.com",
+        "[guest] Click 'Sign Up' and complete the registration form to create a member account",
+        "[gym_member] Redirected to /plans to select a membership tier",
+        "[gym_member] Click 'Subscribe' on the Basic Plan (2 classes/week limit)",
+        "[gym_member] Complete the mock payment form on /checkout and receive confirmation"
+      ],
+      "flow_name": "Member Registration and Plan Selection"
+    },
+    {
+      "steps": [
+        "[gym_member] Navigate to ironworks.gymplatform.com/ to view available sessions",
+        "[gym_member] Click 'Book Class' on a scheduled session",
+        "[system] Validate that the member has an active subscription and has not exceeded their weekly limit of 2 classes",
+        "[gym_member] Receive booking confirmation and view the updated booking on /dashboard/bookings"
+      ],
+      "flow_name": "Class Booking with Tier Validation"
+    },
+    {
+      "steps": [
+        "[gym_member] Navigate to ironworks.gymplatform.com/ having already booked 2 classes this week",
+        "[gym_member] Click 'Book Class' on a third session",
+        "[system] Validate booking request and detect that the weekly limit of 2 classes has been reached",
+        "[gym_member] View an error message on / stating 'Booking limit reached for your membership tier' and booking is blocked"
+      ],
+      "flow_name": "Booking Limit Enforcement"
+    }
+  ],
+  "target_audience": [
+    {
+      "name": "Gym Staff",
+      "pain_points": "High cost of existing platforms, lack of custom branding/subdomains, and complex setup.",
+      "demographics": "Gym owners, managers, and administrative staff looking to run their gym operations.",
+      "needs_and_goals": "Manage membership plans, schedule classes, assign trainers, view bookings, and have a dedicated branded subdomain."
+    },
+    {
+      "name": "Gym Member",
+      "pain_points": "Confusing booking interfaces, lack of clarity on remaining weekly class credits, and cross-gym data confusion.",
+      "demographics": "Active gym members and fitness enthusiasts.",
+      "needs_and_goals": "Register, select a membership plan, pay via mock billing, view available classes, and book sessions within their tier limits."
+    },
+    {
+      "name": "Technical Evaluator",
+      "pain_points": "Difficulty finding high-quality, realistic multi-tenant demo projects with strict access controls and clean architecture.",
+      "demographics": "Recruiters, engineering managers, and developers reviewing the portfolio.",
+      "needs_and_goals": "Inspect multi-tenant architecture, verify subdomain routing, check data isolation, and evaluate code quality."
+    }
+  ],
+  "user_journeys": [
+    {
+      "steps": [
+        {
+          "actor": "gym_staff",
+          "description": "Navigate to the staff login page at /staff/login and enter credentials."
+        },
+        {
+          "actor": "gym_staff",
+          "description": "Upon successful login, redirect to the staff dashboard at /staff/dashboard"
+        },
+        {
+          "actor": "gym_staff",
+          "description": "Navigate to the Class Management page at /staff/classes"
+        },
+        {
+          "actor": "gym_staff",
+          "description": "Click the 'Schedule Class' button to open the class creation form."
+        },
+        {
+          "actor": "gym_staff",
+          "description": "Enter class details (Name: 'Vinyasa Yoga', Capacity: 20, Date, Time) and select an available trainer from the dropdown."
+        },
+        {
+          "actor": "gym_staff",
+          "description": "Set the class status to 'Active' and click 'Publish Class'."
+        },
+        {
+          "actor": "gym_staff",
+          "description": "Verify that the new class appears on the active schedule list and is visible to members."
+        }
+      ],
+      "context": "Staff member schedules a new class for the gym",
+      "trigger": "Gym manager needs to add a new yoga class to the weekly schedule"
+    },
+    {
+      "steps": [
+        {
+          "actor": "gym_member",
+          "description": "Visit the gym's custom subdomain home page at /"
+        },
+        {
+          "actor": "gym_member",
+          "description": "Click 'Log In' and navigate to /login to enter credentials."
+        },
+        {
+          "actor": "gym_member",
+          "description": "Upon login, view the active class schedule on the home page at /"
+        },
+        {
+          "actor": "gym_member",
+          "description": "Locate the 'Tuesday HIIT' class and click 'Book Class'."
+        },
+        {
+          "actor": "system",
+          "description": "Validate that the member has an active subscription and has not exceeded their weekly limit of 2 classes."
+        },
+        {
+          "actor": "gym_member",
+          "description": "View the booking confirmation modal showing the updated weekly limit (e.g., '1 of 2 bookings remaining this week')."
+        },
+        {
+          "actor": "gym_member",
+          "description": "Navigate to the Member Dashboard at /dashboard/bookings to view and manage the active booking."
+        }
+      ],
+      "context": "Gym member books their weekly class",
+      "trigger": "Member wants to secure a spot in the Tuesday evening HIIT class"
+    }
+  ],
+  "phasing": [
+    {
+      "features": [
+        "Multi-Tenant Subdomain Routing & Isolation",
+        "Platform Administration & Tenant Provisioning"
+      ],
+      "rationale": "Establishes the core multi-tenant foundation, allowing new gyms to register, provision subdomains, and route requests securely with strict database isolation.",
+      "phase_name": "Phase 1: Core Multi-Tenant Architecture & Routing"
+    },
+    {
+      "features": [
+        "Gym Staff Management Dashboard"
+      ],
+      "rationale": "Enables gym staff to manage trainers, membership plans, and classes, setting up the necessary catalog and schedule for members.",
+      "phase_name": "Phase 2: Staff Portal"
+    },
+    {
+      "features": [
+        "Customer Portal & Class Booking",
+        "Membership-Tier Booking Restrictions"
+      ],
+      "rationale": "Completes the end-to-end member experience, allowing members to view classes and book sessions subject to tier limits.",
+      "phase_name": "Phase 3: Member Portal"
+    },
+    {
+      "features": [
+        "Mock Payment & Subscription Billing"
+      ],
+      "rationale": "Integrates mock payment processing and subscription billing to complete the commercial flow and make the platform fully demo-ready.",
+      "phase_name": "Phase 4: Polish & Demo Readiness"
+    }
+  ],
+  "ai_requirements": {
+    "guardrails": "- Multi-Tenant Isolation: Every AI request must include a validated organization_id derived from the authenticated session/subdomain. The AI service must strictly validate that all input data belongs to the requested organization_id before passing it to the LLM. Prompts must explicitly instruct the LLM to only consider the provided context and never leak or assume information outside the tenant's scope.\n- Hallucination Prevention: Use strict JSON schemas (Structured Outputs / Tool Calling) to ensure the LLM returns data matching the exact API contract. Validate that recommended gym_class_ids and trainer_ids actually exist in the active database for that tenant.\n- Rate Limiting: Implement rate limiting per tenant and per user (e.g., max 5 recommendation requests per member per hour, max 10 schedule optimizations per staff per day) to prevent API abuse and cost spikes.\n- Fallback Behavior: If the AI service is unavailable or fails, fall back to a simple rule-based recommendation engine (e.g., recommend the most popular classes with open capacity) and display a friendly message. For schedule optimization, fall back to copying the previous week's schedule.",
+    "capabilities": [
+      {
+        "name": "Personalized Class Recommendations",
+        "inputs": [
+          "member_id",
+          "organization_id",
+          "attendance_history",
+          "membership_tier",
+          "available_classes",
+          "member_preferences"
+        ],
+        "outputs": [
+          "recommended_classes (list of gym_class_ids with personalized rationales)"
+        ],
+        "trigger": "Member visits the dashboard or class schedule page, or clicks 'Get Recommendations'.",
+        "description": "Recommends upcoming gym classes to members based on their attendance history, membership tier, and preferences.",
+        "user_facing": true
+      },
+      {
+        "name": "Automated Schedule Optimization",
+        "inputs": [
+          "organization_id",
+          "historical_bookings",
+          "trainers",
+          "proposed_classes"
+        ],
+        "outputs": [
+          "optimized_slots (list of recommended class slots, trainer assignments, expected booking rates, and rationales)"
+        ],
+        "trigger": "Gym staff clicks 'Optimize Schedule' or 'Generate Schedule Recommendations' in the staff dashboard.",
+        "description": "Recommends optimal class times and trainer assignments for gym staff based on historical booking rates, trainer availability, and capacity.",
+        "user_facing": true
+      }
+    ],
+    "has_ai_needs": true,
+    "api_contracts": [
+      {
+        "path": "/ai/recommendations",
+        "method": "POST",
+        "purpose": "Generate personalized class recommendations for a member based on their attendance history, membership tier, and preferences."
+      },
+      {
+        "path": "/ai/optimize-schedule",
+        "method": "POST",
+        "purpose": "Generate an optimized class schedule and trainer assignments for a target week based on historical booking rates and trainer availability."
+      }
+    ],
+    "non_functional": "- Latency: Recommendations should return within 1.5 seconds (using caching where possible). Schedule optimization can be asynchronous (returning a job ID, processing in background, and notifying staff via webhook or polling) with a target completion under 15 seconds.\n- Cost: Use cost-efficient models (e.g., smaller, faster LLMs) for recommendations, and more capable models only for complex schedule optimization. Cache recommendation results for 24 hours.\n- Observability: Log prompt tokens, completion tokens, latency, and tenant ID for every AI request. Track LLM error rates and fallback triggers.",
+    "data_model_links": [
+      {
+        "role": "Provides member preferences, status, and membership plan limits to the recommendation engine.",
+        "model": "MemberProfile"
+      },
+      {
+        "role": "Provides historical attendance, no-shows, and booking rates to both recommendations and schedule optimization.",
+        "model": "Booking"
+      },
+      {
+        "role": "Provides available upcoming classes for recommendations, and historical class performance for schedule optimization.",
+        "model": "GymClass"
+      },
+      {
+        "role": "Provides trainer specialties, bios, and availability for schedule optimization and trainer assignments.",
+        "model": "Trainer"
+      },
+      {
+        "role": "Ensures strict tenant isolation; all queries and context are scoped to a specific organization_id.",
+        "model": "Organization"
+      }
+    ],
+    "data_requirements": "- RAG Sources: Member profiles, historical bookings, gym classes, and trainer profiles.\n- Embeddings & Vector Store: Class descriptions, trainer bios, and member preferences can be embedded. Any vector database or index MUST be strictly partitioned by organization_id (tenant ID) using metadata filtering (e.g., organization_id == tenant_id) or separate collections/namespaces per tenant to prevent cross-tenant data leakage.\n- Retention: AI-generated recommendations and optimized schedules should have a configurable retention policy (e.g., cache recommendations for 24 hours, delete historical optimization logs after 30 days). No PII should be stored in external LLM provider logs (zero data retention policy with LLM vendors).",
+    "service_boundaries": "The AI service is a separate, dedicated microservice responsible for prompt engineering, LLM orchestration, and schedule optimization algorithms. The main application is responsible for user authentication, tenant context resolution, database access, and rendering the UI. All communication between the main application and the AI service is secured via API keys and scoped strictly by organization_id.",
+    "implementation_notes": "- The AI service should be framework-agnostic, communicating via standard REST APIs.\n- Environment variables should be used for API keys, model names, and service URLs (e.g., AI_SERVICE_URL, AI_API_KEY).\n- Testing/Mock Strategy: Provide mock responses in development and testing environments to avoid external API calls and costs. Use unit tests with mocked LLM responses to verify prompt construction and JSON parsing.",
+    "integration_pattern_chosen": "separate_service",
+    "integration_pattern_options": [
+      {
+        "cons": [
+          "Operational overhead: Requires managing, deploying, and monitoring an additional service, database connections, and API keys.",
+          "Network latency: Adds an extra HTTP/gRPC hop between the main app and the AI service."
+        ],
+        "pros": [
+          "Complete isolation of heavy ML/LLM dependencies from the main application.",
+          "Independent scaling: AI workloads can run on GPU-enabled or compute-optimized instances without affecting the main web server.",
+          "Language flexibility: Allows using Python (the standard for AI/ML) while the main app can be built in Node.js, Go, or Ruby."
+        ],
+        "pattern": "separate_service",
+        "summary": "Dedicated AI API service (e.g., a Python FastAPI microservice running LLM/ML logic) that the main application calls.",
+        "recommended": true
+      },
+      {
+        "cons": [
+          "Blocks application resources: Heavy prompt construction, serialization, or local embedding generation can block the main event loop or consume web server memory.",
+          "Dependency bloat: Forces AI SDKs and potential ML libraries into the main application codebase.",
+          "Harder to scale independently."
+        ],
+        "pros": [
+          "Extremely simple architecture: No extra services to deploy or maintain.",
+          "Zero network overhead between app and AI logic (except to the LLM provider API).",
+          "Shared database access: Direct access to ORM models and database context."
+        ],
+        "pattern": "in_app",
+        "summary": "LLM SDK calls directly inside the main application.",
+        "recommended": false
+      },
+      {
+        "cons": [
+          "Two code paths to maintain and test.",
+          "Increased complexity in managing state and job queues (e.g., Redis/BullMQ)."
+        ],
+        "pros": [
+          "Balanced approach: Simple, low-latency user-facing calls can be done in-app, while heavy schedule optimization or batch recommendation generation runs asynchronously in a background worker.",
+          "Keeps the web server responsive."
+        ],
+        "pattern": "hybrid",
+        "summary": "Light in-app LLM calls for simple tasks + heavy background work in a sidecar or worker.",
+        "recommended": false
+      }
+    ]
+  }
+}

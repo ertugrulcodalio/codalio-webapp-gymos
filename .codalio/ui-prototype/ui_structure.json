@@ -1,0 +1,1383 @@
+{
+  "pages": [
+    {
+      "name": "Landing",
+      "route": "/",
+      "locked": false,
+      "sections": [
+        {
+          "title": null,
+          "images": null,
+          "spacing": "spacious",
+          "image_urls": null,
+          "section_type": "hero",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "PlatformHero",
+              "props": {
+                "icons": [
+                  "ArrowRight",
+                  "CalendarDays"
+                ],
+                "headline": "Run your gym without the admin drag",
+                "primary_cta": "Create Gym",
+                "subheadline": "GymOS gives gym owners scheduling, memberships, bookings, and tenant setup in one calm workspace.",
+                "secondary_cta": "Explore features"
+              },
+              "images": null,
+              "styling": {
+                "container": "rounded-2xl bg-primary px-6 py-16 text-primary-foreground sm:px-12"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onCreateGym",
+                "onScrollToFeatures"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Button",
+                "Badge"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Everything your gym needs",
+          "images": null,
+          "spacing": "loose",
+          "image_urls": null,
+          "section_type": "features",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "PlatformFeatureGrid",
+              "props": {
+                "features": [
+                  {
+                    "icon": "CalendarDays",
+                    "title": "Smart scheduling",
+                    "description": "Publish classes, assign trainers, and monitor capacity."
+                  },
+                  {
+                    "icon": "CreditCard",
+                    "title": "Memberships",
+                    "description": "Configure plans and automated weekly booking limits."
+                  },
+                  {
+                    "icon": "Building2",
+                    "title": "Tenant-ready",
+                    "description": "Provision a branded portal for every gym."
+                  }
+                ]
+              },
+              "images": null,
+              "styling": {
+                "grid": "grid gap-5 md:grid-cols-3"
+              },
+              "has_state": false,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": null,
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Simple pricing for growing gyms",
+          "images": null,
+          "spacing": "loose",
+          "image_urls": null,
+          "section_type": "pricing",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "PlatformPricingPreview",
+              "props": {
+                "cta": "Start your gym",
+                "tiers": [
+                  "Launch",
+                  "Growth",
+                  "Scale"
+                ]
+              },
+              "images": null,
+              "styling": {
+                "grid": "grid gap-5 md:grid-cols-3"
+              },
+              "has_state": false,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onStartOnboarding"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "Button",
+                "Badge"
+              ]
+            }
+          ]
+        },
+        {
+          "title": null,
+          "images": null,
+          "spacing": "spacious",
+          "image_urls": null,
+          "section_type": "final_cta",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "PlatformFinalCta",
+              "props": {
+                "cta": "Create Gym",
+                "icon": "ArrowRight",
+                "headline": "Ready to open your digital doors?"
+              },
+              "images": null,
+              "styling": {
+                "container": "rounded-2xl bg-accent p-10 text-accent-foreground text-center"
+              },
+              "has_state": false,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onCreateGym"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Button"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "GymOS Platform",
+      "required_imports": null,
+      "has_dynamic_params": false
+    },
+    {
+      "name": "TenantRoot",
+      "route": "/tenant-root",
+      "locked": false,
+      "sections": [
+        {
+          "title": null,
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "ScheduleToolbar",
+              "props": {
+                "icons": [
+                  "CalendarDays",
+                  "Filter",
+                  "List"
+                ],
+                "title": "Class schedule",
+                "filters": [
+                  "Date",
+                  "Class type",
+                  "Trainer"
+                ],
+                "view_options": [
+                  "List",
+                  "Calendar"
+                ],
+                "credit_indicator": "1 of 2 classes booked this week"
+              },
+              "images": null,
+              "styling": {
+                "bar": "flex flex-col gap-4 rounded-xl border border-border bg-card p-4 lg:flex-row lg:items-center lg:justify-between"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onSearch",
+                "onFilterChange",
+                "onViewChange"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Input",
+                "Button",
+                "Badge"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Available classes",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "grid",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "ClassScheduleGrid",
+              "props": {
+                "cta": "Book class",
+                "icons": [
+                  "Clock",
+                  "Users",
+                  "Dumbbell"
+                ],
+                "empty_state": "No classes match these filters.",
+                "show_trainer": true,
+                "show_capacity": true
+              },
+              "images": null,
+              "styling": {
+                "grid": "grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "gym_classes, trainers, bookings",
+              "event_handlers": [
+                "onBookClass",
+                "onOpenClassDetails"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "Button",
+                "Badge",
+                "Progress"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Ironworks Schedule",
+      "required_imports": null,
+      "has_dynamic_params": false
+    },
+    {
+      "name": "StaffLogin",
+      "route": "/staff/login",
+      "locked": false,
+      "sections": [
+        {
+          "title": null,
+          "images": null,
+          "spacing": "spacious",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "StaffLoginForm",
+              "props": {
+                "icon": "ShieldCheck",
+                "title": "Staff access",
+                "fields": [
+                  "Email",
+                  "Password"
+                ],
+                "submit": "Log In",
+                "subtitle": "Manage your gym with GymOS."
+              },
+              "images": null,
+              "styling": {
+                "card": "mx-auto max-w-md"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onSubmit",
+                "onChange"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "Input",
+                "Label",
+                "Button"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Staff Login",
+      "required_imports": null,
+      "has_dynamic_params": false
+    },
+    {
+      "name": "Signup",
+      "route": "/signup",
+      "locked": false,
+      "sections": [
+        {
+          "title": null,
+          "images": null,
+          "spacing": "spacious",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "MemberSignupForm",
+              "props": {
+                "title": "Join Ironworks",
+                "fields": [
+                  "Full name",
+                  "Email",
+                  "Password"
+                ],
+                "submit": "Create account",
+                "alternate_link": {
+                  "href": "/login",
+                  "label": "Already a member? Log In"
+                }
+              },
+              "images": null,
+              "styling": {
+                "card": "mx-auto max-w-md"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onSubmit",
+                "onChange"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "Input",
+                "Label",
+                "Button",
+                "Checkbox"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Member Sign Up",
+      "required_imports": null,
+      "has_dynamic_params": false
+    },
+    {
+      "name": "Plans",
+      "route": "/plans",
+      "locked": false,
+      "sections": [
+        {
+          "title": null,
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "PlansIntro",
+              "props": {
+                "title": "Choose the membership that fits your routine",
+                "subtitle": "Clear weekly class credits, no booking surprises."
+              },
+              "images": null,
+              "styling": {
+                "header": "max-w-2xl"
+              },
+              "has_state": false,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": null,
+              "image_keywords": null,
+              "shadcn_components": [
+                "Badge"
+              ]
+            }
+          ]
+        },
+        {
+          "title": null,
+          "images": null,
+          "spacing": "loose",
+          "image_urls": null,
+          "section_type": "pricing",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "MembershipPlanCards",
+              "props": {
+                "cta": "Choose plan",
+                "icons": [
+                  "Check",
+                  "CalendarDays"
+                ],
+                "show_weekly_limit": true
+              },
+              "images": null,
+              "styling": {
+                "grid": "grid gap-5 md:grid-cols-3"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "membership_plans",
+              "event_handlers": [
+                "onSelectPlan"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "Button",
+                "Badge"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Membership Plans",
+      "required_imports": null,
+      "has_dynamic_params": false
+    },
+    {
+      "name": "Checkout",
+      "route": "/checkout",
+      "locked": false,
+      "sections": [
+        {
+          "title": null,
+          "images": null,
+          "spacing": "loose",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "CheckoutFlow",
+              "props": {
+                "icons": [
+                  "CreditCard",
+                  "ShieldCheck"
+                ],
+                "steps": [
+                  "Plan",
+                  "Payment",
+                  "Confirmation"
+                ],
+                "title": "Complete your membership",
+                "submit": "Activate membership",
+                "payment_note": "Mock payment \u2014 no charge will be made."
+              },
+              "images": null,
+              "styling": {
+                "layout": "grid gap-6 lg:grid-cols-[1.2fr_.8fr]"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "membership_plans",
+              "event_handlers": [
+                "onPlanChange",
+                "onPaymentSubmit"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "Input",
+                "Label",
+                "Button",
+                "RadioGroup",
+                "Separator"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Checkout",
+      "required_imports": null,
+      "has_dynamic_params": false
+    },
+    {
+      "name": "DashboardBookings",
+      "route": "/dashboard/bookings",
+      "locked": false,
+      "sections": [
+        {
+          "title": null,
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "BookingSummary",
+              "props": {
+                "icons": [
+                  "CalendarCheck",
+                  "Info"
+                ],
+                "title": "Your weekly activity",
+                "credit_indicator": "1 of 2 classes booked this week"
+              },
+              "images": null,
+              "styling": {
+                "grid": "grid gap-4 md:grid-cols-2"
+              },
+              "has_state": false,
+              "image_urls": null,
+              "data_source": "bookings",
+              "event_handlers": null,
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "Badge",
+                "Progress"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Upcoming bookings",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "grid",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "MemberBookingsList",
+              "props": {
+                "empty_state": "You have no upcoming bookings.",
+                "cancel_label": "Cancel booking"
+              },
+              "images": null,
+              "styling": {
+                "list": "space-y-4"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "bookings, gym_classes, trainers",
+              "event_handlers": [
+                "onCancelBooking",
+                "onConfirmCancel"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "Button",
+                "Badge",
+                "AlertDialog"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "My Bookings",
+      "required_imports": null,
+      "has_dynamic_params": false
+    },
+    {
+      "name": "DashboardProfile",
+      "route": "/dashboard/profile",
+      "locked": false,
+      "sections": [
+        {
+          "title": null,
+          "images": null,
+          "spacing": "loose",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "MemberProfileEditor",
+              "props": {
+                "title": "Profile & membership",
+                "fields": [
+                  "Full name",
+                  "Email",
+                  "Phone"
+                ],
+                "submit": "Save changes",
+                "show_plan_summary": true
+              },
+              "images": null,
+              "styling": {
+                "layout": "grid gap-6 lg:grid-cols-[1fr_.8fr]"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "member_profiles, membership_plans",
+              "event_handlers": [
+                "onChange",
+                "onSaveProfile"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "Input",
+                "Label",
+                "Button",
+                "Avatar"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "My Profile",
+      "required_imports": null,
+      "has_dynamic_params": false
+    },
+    {
+      "name": "Login",
+      "route": "/login",
+      "locked": false,
+      "sections": [
+        {
+          "title": null,
+          "images": null,
+          "spacing": "spacious",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "MemberLoginForm",
+              "props": {
+                "title": "Welcome back",
+                "fields": [
+                  "Email",
+                  "Password"
+                ],
+                "submit": "Log In",
+                "alternate_link": {
+                  "href": "/signup",
+                  "label": "Need an account? Sign Up"
+                }
+              },
+              "images": null,
+              "styling": {
+                "card": "mx-auto max-w-md"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onSubmit",
+                "onChange",
+                "onForgotPassword"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "Input",
+                "Label",
+                "Button",
+                "Checkbox"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Member Login",
+      "required_imports": null,
+      "has_dynamic_params": false
+    },
+    {
+      "name": "StaffDashboard",
+      "route": "/staff/dashboard",
+      "locked": false,
+      "sections": [
+        {
+          "title": null,
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "StaffMetrics",
+              "props": {
+                "icons": [
+                  "CalendarDays",
+                  "Users",
+                  "TrendingUp",
+                  "TriangleAlert"
+                ],
+                "title": "Gym overview",
+                "metrics": [
+                  "Upcoming classes",
+                  "Bookings this week",
+                  "Active members",
+                  "Capacity alerts"
+                ]
+              },
+              "images": null,
+              "styling": {
+                "grid": "grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
+              },
+              "has_state": false,
+              "image_urls": null,
+              "data_source": "gym_classes, bookings, member_profiles",
+              "event_handlers": null,
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "Badge"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Today\u2019s schedule",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "grid",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "StaffScheduleOverview",
+              "props": {
+                "cta": "Manage classes",
+                "show_capacity": true
+              },
+              "images": null,
+              "styling": {
+                "grid": "grid gap-4 lg:grid-cols-3"
+              },
+              "has_state": false,
+              "image_urls": null,
+              "data_source": "gym_classes, trainers, bookings",
+              "event_handlers": [
+                "onNavigateClasses"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "Button",
+                "Badge",
+                "Progress"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Staff Dashboard",
+      "required_imports": null,
+      "has_dynamic_params": false
+    },
+    {
+      "name": "StaffClasses",
+      "route": "/staff/classes",
+      "locked": false,
+      "sections": [
+        {
+          "title": null,
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "ClassManagementToolbar",
+              "props": {
+                "icons": [
+                  "Plus",
+                  "Search",
+                  "Filter"
+                ],
+                "title": "Classes",
+                "filters": [
+                  "Status",
+                  "Trainer",
+                  "Date"
+                ],
+                "primary_action": "Create class"
+              },
+              "images": null,
+              "styling": {
+                "bar": "flex flex-col gap-3 rounded-xl border border-border bg-card p-4 md:flex-row md:items-center md:justify-between"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onCreateClass",
+                "onSearch",
+                "onFilterChange"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Input",
+                "Button",
+                "Select"
+              ]
+            }
+          ]
+        },
+        {
+          "title": null,
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "ClassesManagementTable",
+              "props": {
+                "columns": [
+                  "Class",
+                  "Trainer",
+                  "Time",
+                  "Capacity",
+                  "Status",
+                  "Actions"
+                ],
+                "empty_state": "No classes scheduled."
+              },
+              "images": null,
+              "styling": {
+                "table": "rounded-xl border border-border bg-card"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "gym_classes, trainers, bookings",
+              "event_handlers": [
+                "onEditClass",
+                "onDeleteClass",
+                "onConfirmDelete"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Table",
+                "Button",
+                "Badge",
+                "DropdownMenu",
+                "AlertDialog"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Class Management",
+      "required_imports": null,
+      "has_dynamic_params": false
+    },
+    {
+      "name": "StaffPlans",
+      "route": "/staff/plans",
+      "locked": false,
+      "sections": [
+        {
+          "title": null,
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "PlanManagementHeader",
+              "props": {
+                "icon": "Plus",
+                "title": "Membership plans",
+                "primary_action": "Create plan"
+              },
+              "images": null,
+              "styling": {
+                "bar": "flex items-center justify-between"
+              },
+              "has_state": false,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onCreatePlan"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Button"
+              ]
+            }
+          ]
+        },
+        {
+          "title": null,
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "grid",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "PlanManagementCards",
+              "props": {
+                "icons": [
+                  "MoreHorizontal",
+                  "Users",
+                  "CalendarDays"
+                ],
+                "actions": [
+                  "Edit",
+                  "Duplicate",
+                  "Archive"
+                ],
+                "statuses": [
+                  "Active",
+                  "Draft",
+                  "Inactive"
+                ]
+              },
+              "images": null,
+              "styling": {
+                "grid": "grid gap-5 md:grid-cols-2 xl:grid-cols-3"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "membership_plans",
+              "event_handlers": [
+                "onEditPlan",
+                "onDuplicatePlan",
+                "onArchivePlan"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "Button",
+                "Badge",
+                "DropdownMenu"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Plan Management",
+      "required_imports": null,
+      "has_dynamic_params": false
+    },
+    {
+      "name": "StaffTrainers",
+      "route": "/staff/trainers",
+      "locked": false,
+      "sections": [
+        {
+          "title": null,
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "TrainerManagementHeader",
+              "props": {
+                "icon": "UserPlus",
+                "title": "Trainers",
+                "primary_action": "Add trainer"
+              },
+              "images": null,
+              "styling": {
+                "bar": "flex items-center justify-between"
+              },
+              "has_state": false,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onAddTrainer"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Button"
+              ]
+            }
+          ]
+        },
+        {
+          "title": null,
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "grid",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "TrainerDirectory",
+              "props": {
+                "icons": [
+                  "MoreHorizontal",
+                  "CalendarDays"
+                ],
+                "actions": [
+                  "Edit trainer",
+                  "View classes",
+                  "Deactivate"
+                ]
+              },
+              "images": null,
+              "styling": {
+                "grid": "grid gap-5 sm:grid-cols-2 xl:grid-cols-3"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "trainers, gym_classes",
+              "event_handlers": [
+                "onEditTrainer",
+                "onViewTrainerClasses",
+                "onDeactivateTrainer"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "Avatar",
+                "Button",
+                "Badge",
+                "DropdownMenu"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Trainer Management",
+      "required_imports": null,
+      "has_dynamic_params": false
+    },
+    {
+      "name": "StaffBookings",
+      "route": "/staff/bookings",
+      "locked": false,
+      "sections": [
+        {
+          "title": null,
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "BookingsManagementToolbar",
+              "props": {
+                "icons": [
+                  "Search",
+                  "Filter",
+                  "Download"
+                ],
+                "title": "Member bookings",
+                "filters": [
+                  "Class",
+                  "Date",
+                  "Status"
+                ]
+              },
+              "images": null,
+              "styling": {
+                "bar": "flex flex-col gap-3 rounded-xl border border-border bg-card p-4 md:flex-row md:items-center md:justify-between"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onSearch",
+                "onFilterChange",
+                "onExport"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Input",
+                "Select",
+                "Button"
+              ]
+            }
+          ]
+        },
+        {
+          "title": null,
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "BookingsManagementTable",
+              "props": {
+                "columns": [
+                  "Member",
+                  "Class",
+                  "Date & time",
+                  "Status",
+                  "Booked on",
+                  "Actions"
+                ],
+                "empty_state": "No bookings found."
+              },
+              "images": null,
+              "styling": {
+                "table": "rounded-xl border border-border bg-card"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "bookings, member_profiles, gym_classes",
+              "event_handlers": [
+                "onViewBooking",
+                "onCancelBooking"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Table",
+                "Badge",
+                "Button",
+                "DropdownMenu"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Member Bookings",
+      "required_imports": null,
+      "has_dynamic_params": false
+    }
+  ],
+  "layout": {
+    "name": "Layout",
+    "props": {
+      "header": "Responsive utility header with tenant switcher, notifications, accessible user menu, and mobile sidebar trigger",
+      "logo_text": "GymOS",
+      "project_name": "GymOS",
+      "navigation_note": "Primary navigation only includes sitemap top-level routes; contextual member and staff navigation appears within their page content.",
+      "footer_component": "Footer",
+      "sidebar_navigation": [
+        {
+          "href": "/",
+          "icon": "CalendarDays",
+          "label": "Schedule"
+        },
+        {
+          "href": "/tenant-root",
+          "icon": "Building2",
+          "label": "Tenant Portal"
+        }
+      ]
+    },
+    "styling": {
+      "main": "mx-auto w-full max-w-screen-2xl p-4 sm:p-6 lg:p-8",
+      "shell": "min-h-screen bg-background text-foreground",
+      "header": "sticky top-0 z-30 h-16 border-b border-border bg-background/95 backdrop-blur",
+      "sidebar": "border-r border-border bg-card"
+    },
+    "has_state": true,
+    "image_urls": null,
+    "data_source": null,
+    "event_handlers": [
+      "onMobileMenuToggle",
+      "onTenantMenuChange",
+      "onLogout"
+    ],
+    "image_keywords": null,
+    "shadcn_components": [
+      "Sidebar",
+      "Sheet",
+      "Button",
+      "Badge",
+      "Breadcrumb"
+    ]
+  },
+  "design_notes": null,
+  "project_name": "GymOS",
+  "design_tokens": {
+    "dark": {
+      "card": "#162033",
+      "ring": "#5EEAD4",
+      "input": "#1E293B",
+      "muted": "#1E293B",
+      "accent": "#164E63",
+      "border": "#334155",
+      "radius": "0.625rem",
+      "primary": "#2DD4BF",
+      "secondary": "#243047",
+      "background": "#0F172A",
+      "foreground": "#F8FAFC",
+      "destructive": "#F87171",
+      "card_foreground": "#F8FAFC",
+      "muted_foreground": "#94A3B8",
+      "accent_foreground": "#ECFEFF",
+      "primary_foreground": "#042F2E",
+      "secondary_foreground": "#E2E8F0",
+      "destructive_foreground": "#450A0A"
+    },
+    "light": {
+      "card": "#FFFFFF",
+      "ring": "#0F766E",
+      "input": "#FFFFFF",
+      "muted": "#F1F5F9",
+      "accent": "#CCFBF1",
+      "border": "#CBD5E1",
+      "radius": "0.625rem",
+      "primary": "#0F766E",
+      "secondary": "#E2E8F0",
+      "background": "#F8FAFC",
+      "foreground": "#0F172A",
+      "destructive": "#B91C1C",
+      "card_foreground": "#0F172A",
+      "muted_foreground": "#475569",
+      "accent_foreground": "#134E4A",
+      "primary_foreground": "#FFFFFF",
+      "secondary_foreground": "#0F172A",
+      "destructive_foreground": "#FFFFFF"
+    },
+    "gradients": [
+      {
+        "key": "hero",
+        "value": "linear-gradient(135deg, #0F766E 0%, #0F172A 100%)"
+      },
+      {
+        "key": "surface",
+        "value": "linear-gradient(135deg, #F0FDFA 0%, #F8FAFC 72%)"
+      }
+    ]
+  },
+  "layout_archetype": "dashboard",
+  "shared_components": [
+    {
+      "name": "Header",
+      "props": {
+        "logo": "GymOS",
+        "icons": [
+          "Menu",
+          "Bell",
+          "User",
+          "LogOut"
+        ],
+        "contexts": {
+          "staff": [
+            "Dashboard",
+            "Classes",
+            "Plans",
+            "Trainers",
+            "Bookings",
+            "Log Out"
+          ],
+          "member": [
+            "Schedule",
+            "Plans",
+            "My Bookings",
+            "Profile",
+            "Weekly credit badge",
+            "Log Out"
+          ],
+          "platform": [
+            "Features",
+            "Pricing",
+            "Create Gym"
+          ]
+        },
+        "mobile_touch_target": "min-h-12 min-w-12"
+      },
+      "images": null,
+      "styling": {
+        "nav": "flex min-h-16 items-center justify-between gap-3 px-4 sm:px-6",
+        "header": "sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur"
+      },
+      "has_state": true,
+      "image_urls": null,
+      "data_source": null,
+      "event_handlers": [
+        "onMobileMenuToggle",
+        "onLogout",
+        "onTenantContextChange"
+      ],
+      "image_keywords": null,
+      "shadcn_components": [
+        "Button",
+        "Badge",
+        "Avatar",
+        "DropdownMenu",
+        "Sheet"
+      ]
+    },
+    {
+      "name": "Footer",
+      "props": {
+        "brand": "GymOS",
+        "links": [
+          "Privacy",
+          "Terms",
+          "Support"
+        ],
+        "copyright": "\u00a9 2025 GymOS. Built for better training."
+      },
+      "images": null,
+      "styling": {
+        "footer": "border-t border-border bg-card px-4 py-8 text-sm text-muted-foreground sm:px-6"
+      },
+      "has_state": false,
+      "image_urls": null,
+      "data_source": null,
+      "event_handlers": [
+        "onNavigate"
+      ],
+      "image_keywords": null,
+      "shadcn_components": [
+        "Button"
+      ]
+    },
+    {
+      "name": "BookingStatusBadge",
+      "props": {
+        "statuses": {
+          "cancelled": {
+            "icon": "CircleX",
+            "label": "Cancelled"
+          },
+          "confirmed": {
+            "icon": "CircleCheck",
+            "label": "Confirmed"
+          },
+          "waitlisted": {
+            "icon": "Clock3",
+            "label": "Waitlisted"
+          }
+        },
+        "accessibility": "Always pair color with a readable status label and Lucide icon."
+      },
+      "images": null,
+      "styling": {
+        "cancelled": "bg-destructive text-destructive-foreground",
+        "confirmed": "bg-accent text-accent-foreground",
+        "waitlisted": "bg-secondary text-secondary-foreground"
+      },
+      "has_state": false,
+      "image_urls": null,
+      "data_source": null,
+      "event_handlers": null,
+      "image_keywords": null,
+      "shadcn_components": [
+        "Badge"
+      ]
+    }
+  ]
+}

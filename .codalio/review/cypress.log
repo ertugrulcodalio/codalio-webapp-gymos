@@ -1,0 +1,31 @@
+It looks like this is your first time using Cypress: 13.13.2
+
+[STARTED] Task without title.
+[FAILED] Cypress failed to start.
+[FAILED] 
+[FAILED] This may be due to a missing library or dependency. https://on.cypress.io/required-dependencies
+[FAILED] 
+[FAILED] Please refer to the error below for more details.
+[FAILED] 
+[FAILED] ----------
+[FAILED] 
+[FAILED] /home/ubuntu/.cache/Cypress/13.13.2/Cypress/Cypress: error while loading shared libraries: libatk-1.0.so.0: cannot open shared object file: No such file or directory
+[FAILED] 
+[FAILED] ----------
+[FAILED] 
+[FAILED] Platform: linux-x64 (Ubuntu - 26.04)
+[FAILED] Cypress Version: 13.13.2
+Cypress failed to start.
+
+This may be due to a missing library or dependency. https://on.cypress.io/required-dependencies
+
+Please refer to the error below for more details.
+
+----------
+
+/home/ubuntu/.cache/Cypress/13.13.2/Cypress/Cypress: error while loading shared libraries: libatk-1.0.so.0: cannot open shared object file: No such file or directory
+
+----------
+
+Platform: linux-x64 (Ubuntu - 26.04)
+Cypress Version: 13.13.2

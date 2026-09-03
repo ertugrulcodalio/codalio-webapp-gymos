@@ -1,0 +1,81 @@
+{
+  "gaps": [
+    {
+      "code": "PRD_PROTOTYPE_ROUTE_GAP",
+      "severity": "high",
+      "message": "The gym owner registration page at '/register' (or '/signup' on the main domain) is missing from the prototype. The prototype only has '/signup' for member signup ('Join Ironworks').",
+      "compensation_hint": "Add a custom route and page for gym owner registration at '/register' on the main domain, or handle it as a platform onboarding flow."
+    },
+    {
+      "code": "SITEMAP_PAGE_NO_AC",
+      "severity": "medium",
+      "message": "The 'Staff Dashboard Overview (/staff/dashboard)' page is listed in the sitemap but has no user story with explicit acceptance criteria.",
+      "compensation_hint": "Create a dashboard overview page showing key metrics (active members, bookings today, active plans) and quick actions."
+    },
+    {
+      "code": "DATA_MODEL_UX_MISMATCH",
+      "severity": "high",
+      "message": "The PRD requires 'Subscription Billing History' and 'Mock Payment & Subscription Activation' but does not explicitly define the Subscription or Transaction models.",
+      "compensation_hint": "Define 'Subscription' and 'Transaction' models to track active member plans, billing history, and mock payments."
+    },
+    {
+      "code": "PROTECTED_ROUTE_NO_AUTH_AC",
+      "severity": "medium",
+      "message": "Staff routes (/staff/*) require authentication and 'gym_staff' role, but some lack explicit ACL/login ACs.",
+      "compensation_hint": "Enforce 'gym_staff' role check on all staff routes and redirect unauthenticated users to '/staff/login'."
+    }
+  ],
+  "summary": {
+    "gap_count": 4
+  },
+  "role_registry": [
+    "gym_staff",
+    "gym_member",
+    "guest"
+  ],
+  "coverage_matrix": [
+    {
+      "feature": "Multi-Tenant Subdomain Routing & Isolation",
+      "sitemap_route": "/tenant-root",
+      "user_story_title": "Subdomain Routing & Tenant Context Resolution",
+      "models": ["Organization"]
+    },
+    {
+      "feature": "Gym Staff Management Dashboard",
+      "sitemap_route": "/staff/dashboard",
+      "user_story_title": "Trainer Management, Membership Plan Management, Class Scheduling & Management, View Member Bookings & Attendance",
+      "models": ["Trainer", "MembershipPlan", "GymClass", "Booking"]
+    },
+    {
+      "feature": "Customer Portal & Class Booking",
+      "sitemap_route": "/dashboard/bookings",
+      "user_story_title": "View Available Classes, Book a Class, Manage My Bookings",
+      "models": ["Booking", "GymClass"]
+    },
+    {
+      "feature": "Membership-Tier Booking Restrictions",
+      "sitemap_route": "/classes",
+      "user_story_title": "Enforce Weekly Class Limit",
+      "models": ["Booking", "MembershipPlan"]
+    },
+    {
+      "feature": "Mock Payment & Subscription Billing",
+      "sitemap_route": "/checkout",
+      "user_story_title": "Mock Payment & Subscription Activation, Subscription Billing History",
+      "models": ["Subscription", "Transaction"]
+    },
+    {
+      "feature": "Platform Administration & Tenant Provisioning",
+      "sitemap_route": "/",
+      "user_story_title": "Tenant Registration & Provisioning",
+      "models": ["Organization"]
+    }
+  ],
+  "hints_for_planner": [
+    "Ensure Subscription and Transaction models are created to support billing history and mock payments.",
+    "Add a custom /register route for gym onboarding.",
+    "Implement a StaffDashboard page with summary metrics.",
+    "Enforce role-based routing and navigation filtering."
+  ],
+  "updated_at": "2026-07-28T21:00:00Z"
+}

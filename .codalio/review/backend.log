@@ -1,0 +1,10 @@
+Running 44 tests in a single process (parallelization threshold is 50)
+Run options: --seed 17640
+
+# Running:
+
+............................................
+
+Finished in 6.860353s, 6.4137 runs/s, 17.0545 assertions/s.
+44 runs, 117 assertions, 0 failures, 0 errors, 0 skips
+Coverage report generated for Integration Tests, Minitest to /home/ubuntu/codalio/openhands-server/projects/322/999/workspace/coverage. 236 / 389 LOC (60.67%) covered.
